@@ -1,3 +1,14 @@
-hello 1
-hello name
-hello Ilya
+string
+NaN
+1
+2
+6
+45px
+$45
+2
+NaN
+infinity
+-95
+-14
+1
+NaN
