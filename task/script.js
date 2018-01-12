@@ -1,14 +1,14 @@
-string
-NaN
-1
-2
-6
-45px
-$45
-2
-NaN
-infinity
--95
--14
-1
-NaN
+10 +
+-1 -
+1 +
+2 +
+6 +
+9px -
+$45 +
+2 +
+NaN +
+infinity +
+-9\n5 -
+-14 +
+1 +
+NaN +
