@@ -1,5 +1,5 @@
-/*Rewrite this if using the ternary operator '?':*/
+/*Task5*/
 
-/*result = (a + b < 4) ?  = 'Below' : 'Over';*/
+//3
 
 //Done +

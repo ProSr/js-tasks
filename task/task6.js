@@ -1,9 +1,8 @@
-/*Rewrite if..else using multiple ternary operators '?'.
+/*Task6*/
 
-For readability, it’s recommended to split the code into multiple lines.*/
-
-/*let message = (login == 'Employee') ? 'Hello' :
-(login == 'Director') ? 'Greetings' :
-(login ==  '') ? 'No login' : '';*/
+/*let age = 15;
+if(14 <= age && age <= 90) {
+    alert(age);
+}*/
 
 //Done +

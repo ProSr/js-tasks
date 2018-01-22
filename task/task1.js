@@ -1,7 +1,5 @@
-//Will alert be shown?
+/*Task1*/
 
-/*if ("0") {
-  alert( 'Hello' );
-}*/
+// 2
 
-//yes +
+//Done +
