@@ -1,25 +1,7 @@
-//Task "Check for emptiness"
+//Task 2. Task Name
 
-
-
-let schedule = {},
-    isEmpty = obj => (Object.getOwnPropertyNames(obj).length === 0); /*+++*/ //My version
-
-/*
-alert( isEmpty(schedule) ); // true
-
-schedule["8:30"] = "get up";
-
-alert( isEmpty(schedule) ); // false
-
-
-
-function isEmpty(obj) {
-  for (let key in obj) {
-    return false;
-  }
-  return true;
+function testTask2() {
+  return 2
 }
-*/
 
-// Done
+//done
