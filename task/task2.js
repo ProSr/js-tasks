@@ -1,7 +1,9 @@
-//Task 2. Task Name
+//Task 2. Explain the value of "this"
 
-function testTask2() {
-  return 2
-}
+let obj, method;
 
-//done
+obj = {
+  go: function() { return this }
+};
+
+//done +

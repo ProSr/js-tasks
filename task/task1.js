@@ -1,7 +1,10 @@
 //Task 1. Task Name
 
-function testTask1() {
-  return 1
-}
+let user = {
+  name: "John",
+  go: function() { return this.name }
+};
 
-//done
+//(user.go)()
+
+//done ±

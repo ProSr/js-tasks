@@ -23,10 +23,20 @@
 
     <script src="task1.js"></script>
     <script src="task2.js"></script>
+    <script src="task3.js"></script>
+    <script src="task4.js"></script>
+    <script src="task5.js"></script>
 
-    <!-- the script with tests (describe, it...) -->
+    <!-- the script with tests (describe, context, it...) -->
     <!-- assert http://chaijs.com/api/assert -->
-    <!-- .only, before/after, beforeEach/afterEach etc -->
+    <!-- .only -->
+    <!--
+ +  before(() => alert("Testing started - before all tests"));
+ +  after(() => alert("Testing finished - after all tests"));
+ +
+ +  beforeEach(() => alert("Before a test - enter a test"));
+ +  afterEach(() => alert("After a test - exit a test"));
+    -->
     <script src="mocha/test.js"></script>
 
     <!-- the element with id="mocha" will contain test results -->
