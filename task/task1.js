@@ -1,12 +1,9 @@
-//Task 1. Two functions – one object
-let obj = {};
+//Task 1. Can I add a string property?
 
-function A() { return obj }
-function B() { return obj }
+let str = "Hello";
 
-let a = new A;
-let b = new B;
-
-//alert( new A() == new B() )
+str.test = 5;
+/*
+alert(str.test);*/
 
 //done -
