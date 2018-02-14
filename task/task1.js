@@ -1,10 +1,12 @@
-//Task 1. Task Name
+//Task 1. Two functions – one object
+let obj = {};
 
-let user = {
-  name: "John",
-  go: function() { return this.name }
-};
+function A() { return obj }
+function B() { return obj }
 
-//(user.go)()
+let a = new A;
+let b = new B;
 
-//done ±
+//alert( new A() == new B() )
+
+//done -

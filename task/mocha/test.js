@@ -1,60 +1,88 @@
-describe("Task 1. (syntax check)", function() {
-  it("the result of this code is 'John'", function() {
-    assert.equal((user.go)()
-, 'John');
+describe("Task 1. Two functions – one object", function() {
+  it("A() == B()", function() {
+    assert.equal(a, b);
   });
 });
 
-describe("Task 2. (Explain the value of 'this')", function() {
-  it("[object Object]", function() {
-    assert.isObject(obj.go(), '[object Object]');
-  });
-  it("[object Object]", function() {
-    assert.isObject((obj.go)(), '[object Object]');
-  });
-  it("[object Window]", function() {
-    assert.equal((method = obj.go)(), '[object Window]');
-  });
-  it("[object Window]", function() {
-    assert.equal((obj.go || obj.stop)(), '[object Window]');
-  });
-});
-
-describe("Task 3. Using 'this' in object literal", function() {
-  it("John", function() {
-    assert.equal(user2.ref().name, "John");
-  });
-});
-
-describe("Task 4. Create a calculator", function() {
-  
-  context("a = 0; b = 0", function() {
-    before(() => { calculator.a = 0; calculator.b = 0 });
-
-    it("sum = 0", function() {
-      assert.equal(calculator.sum(), 0);
-    });
-    it("mul = 0", function() {
-      assert.equal(calculator.mul(), 0);
-    });
-  });
+describe("Task 2. Testing new Calculator", function() {
+  let calculator;
+  before(function() {
+    sinon.stub(window, "prompt");
     
-  context("a = 2; b = 3", function() {
-    before(() => { calculator.a = 2; calculator.b = 3} );
+    prompt.onCall(0).returns("2");
+    prompt.onCall(1).returns("3");
+    
+    calculator = new Calculator();
+    calculator.read();
+  });
 
-    it("sum = 5", function() {
-      assert.equal(calculator.sum(), 5);
-    });
-    it("mul = 6", function() {
-      assert.equal(calculator.mul(), 6);
-    });
+  it("2 + 3 = 5", function() {
+    assert.equal(calculator.sum(), 5);
+  });
+  it("2 * 3 = 6", function() {
+    assert.equal(calculator.mul(), '6');
+  });
+  
+  after(function() {
+    prompt.restore();
   });
 });
 
-describe.only("Task 5. Chaining", function() {
-  it("ladder", function() {
-    assert.equal(ladder.up().up().down().step, 1);
+describe("Task 3. Testing new Accumulator", function() {
+  
+  beforeEach(function() {
+    sinon.stub(window, "prompt")
   });
+
+  afterEach(function() {
+    prompt.restore();
+  });
+
+  it("initial value is the argument of the constructor", function() {
+    let accumulator = new Accumulator(1);
+
+    assert.equal(accumulator.value, 1);
+  });
+
+  it("after reading 0, the value is 1", function() {
+    let accumulator = new Accumulator(1);
+    prompt.returns("0");
+    accumulator.read();
+    assert.equal(accumulator.value, 1);
+  });
+
+  it("after reading 1, the value is 2", function() {
+    let accumulator = new Accumulator(1);
+    prompt.returns("1");
+    accumulator.read();
+    assert.equal(accumulator.value, 2);
+  });
+  
 });
 
+describe("Task 4. Testing an extendable calculator", function() {
+  
+  let calculator;
 
+  before(function() {
+    calculator = new Calculator2;
+  });
+
+  it("calculate(12 + 34) = 46", function() {
+    assert.equal(calculator.calculate("12 + 34"), 46);
+  });
+
+  it("calculate(34 - 12) = 22", function() {
+    assert.equal(calculator.calculate("34 - 12"), 22);
+  });
+
+  it("add multiplication: calculate(2 * 3) = 6", function() {
+    calculator.addMethod("*", (a, b) => a * b);
+    assert.equal(calculator.calculate("2 * 3"), 6);
+  });
+
+  it("add power: calculate(2 ** 3) = 8", function() {
+    calculator.addMethod("**", (a, b) => a ** b);
+    assert.equal(calculator.calculate("2 ** 3"), 8);
+  });
+});
