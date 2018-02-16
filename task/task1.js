@@ -1,9 +1,7 @@
-//Task 1. Can I add a string property?
+//Task 1. Sum numbers from the visitor
 
-let str = "Hello";
+function getSum() {
+  return (+prompt("first term") + +prompt("second term"));
+}
 
-str.test = 5;
-/*
-alert(str.test);*/
-
-//done -
+//done ++±
