@@ -1,5 +1,5 @@
-//Task 4. An occasional infinite loop
+//Task 4. Extract the money
 
-//alert ("0.2 * 10 != 10, not Equal");
+let extractCurrencyValue = str => +str.slice(1);
 
-//done +
+//done ++++

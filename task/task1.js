@@ -1,7 +1,5 @@
-//Task 1. Sum numbers from the visitor
+//Task 1. Uppercast the first character
 
-function getSum() {
-  return (+prompt("first term") + +prompt("second term"));
-}
+let ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1);
 
-//done ++±
+//done  ++±

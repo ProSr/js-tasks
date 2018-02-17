@@ -1,14 +1,10 @@
-//Task 2. Why 6.35.toFixed(1) == 6.3?
+//Task 2. Check for spam
 
-// 6.35.toFixed(20)  // 6.34999999999999964473
-// 1.35.toFixed(20)  // 1.35000000000000008882
+let checkSpam = str => str.toLowerCase().includes('xxx') || str.toUpperCase().includes('VIAGRA');
 
-//Solution
-(6.35 * 10).toFixed(20) // 63.5000000000000000000
-
-//So
-//Math.round(6.35 * 10) / 10// 6.35 -> 63.5 -> 64(rounded) -> 6.4
-//Or
-//alert((6.35 * 10).toFixed() / 10);
-
-//done -
+/*
+checkSpam('buy ViAgRA now') == true
+checkSpam('free xxxxx') == true
+checkSpam("innocent rabbit") == false
+*/
+//done 

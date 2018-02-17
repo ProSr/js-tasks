@@ -1,18 +1,5 @@
-//Task 3. Repeat until the input is a number
+//Task 3. Truncate the text
 
-function readNumber() {
-  
-  while(1) {
-      let number = prompt("Enter a number please?", '0'); 
+let truncate = (str, maxlength) => str.length > maxlength ? str.slice(0, (maxlength - 1)) + '…' : str;
 
-     if(isFinite(number)) { 
-        switch(number) {
-          case '':
-          case null: return null;
-          default: return Number(number)
-        }  
-      } else continue;
-  }
-}
-//alert(readNumber());
 //done +++
