@@ -1,5 +1,11 @@
-//Task 3. Truncate the text
+//Task 3. Calling in an array context
 
-let truncate = (str, maxlength) => str.length > maxlength ? str.slice(0, (maxlength - 1)) + '…' : str;
+let arr = ["a", "b"];
 
-//done +++
+arr.push(function() {
+  return this ;
+});
+
+//arr[2](); // ?
+
+//done 

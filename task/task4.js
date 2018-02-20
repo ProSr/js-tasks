@@ -1,5 +1,25 @@
-//Task 4. Extract the money
+//Task 4. Sum input numbers
 
-let extractCurrencyValue = str => +str.slice(1);
+let someObj = {
+  numbers: [],
+  sumInput: function(value = prompt('A number please?')) {
 
-//done ++++
+    this.numbers.push(value);
+
+    if( (value === null) || (value === "") || isNaN(+value) ) {
+
+      this.numbers.length = this.numbers.length - 1;
+      let sum = 0;
+
+      for(let i of this.numbers) {
+        sum += +i;
+      }
+      return sum;
+    }
+    return this.sumInput();
+  },
+};
+
+//done +++++
+
+

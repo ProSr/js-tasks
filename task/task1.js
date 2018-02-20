@@ -1,5 +1,12 @@
-//Task 1. Uppercast the first character
+//Task 1. Is array copied?
 
-let ucFirst = str => str.charAt(0).toUpperCase() + str.slice(1);
+let fruits = ["Apples", "Pear", "Orange"];
 
-//done  ++±
+// push a new value into the "copy"
+let shoppingCart = fruits;
+shoppingCart.push("Banana");
+
+// what's in fruits?
+//alert( fruits.length ); // ?
+
+//done  +++
