@@ -1,12 +1,5 @@
-//Task 1. Is array copied?
+//Task 1. Translate border-left-width to borderLeftWidth
 
-let fruits = ["Apples", "Pear", "Orange"];
+let camelize = str => (arr => arr.reduce((a, b) => a + (b[0].toUpperCase() + b.substr(1))))(str.split('-'));
 
-// push a new value into the "copy"
-let shoppingCart = fruits;
-shoppingCart.push("Banana");
-
-// what's in fruits?
-//alert( fruits.length ); // ?
-
-//done  +++
+//done +

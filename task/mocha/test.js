@@ -1,88 +1,142 @@
-describe("Task 1. Is array copied?", function() {
-  it('array.length = 4', function() {
-    assert.equal(fruits.length, 4);
+describe("Task 1. Translate border-left-width to borderLeftWidth", function() {
+    it("leaves an empty line as is", function() {
+    assert.equal(camelize(""), "");
+  });
+
+  it("turns background-color into backgroundColor", function() {
+    assert.equal(camelize("background-color"), "backgroundColor");
+  });
+
+  it("turns list-style-image into listStyleImage", function() {
+    assert.equal(camelize("list-style-image"), "listStyleImage");
+  });
+
+  it("turns -webkit-transition into WebkitTransition", function() {
+    assert.equal(camelize("-webkit-transition"), "WebkitTransition");
   });
 });
-describe("Task 2. Array operations", function() {
+describe("Task 2. Filter range", function() {
 
-  it("Is Array", function() {
-    assert.isArray(styles);
+  it("returns the filtered values", function() {
+
+    let arr = [5, 3, 8, 1];
+
+    let filtered = filterRange(arr, 1, 4); 
+
+    assert.deepEqual(filtered, [3, 1]);
   });
-  it("'Rock-n-Roll' checking", function() {
-    assert.equal(styles[styles.length - 1], 'Rock-n-Roll');
-  });
-  it("The middle item is 'Classics'", function() {
-    assert.equal(styles[getMiddleArray(styles)], "Classics");
-  });
-  it("Strip off first items & shows his value", function() {
-    assert.equal(styles.shift(), "Jazz");
-    styles.unshift("Rap", "Reggae", "Jazz");
-  });
-  it("0: 'Rap', 1: 'Reggae'", function() {
-    assert.equal(styles[0], "Rap");
-    assert.equal(styles[1], "Reggae");
+
+  it("doesn't change the array", function() {
+
+    let arr = [5, 3, 8, 1];
+
+    let filtered = filterRange(arr, 1, 4); 
+
+    assert.deepEqual(arr, [5,3,8,1]);
   });
 });
-describe('Task 3. Calling in an array context', function() {
-  it('arr returns "this"', function() {
-    assert.equal(arr[2](), String(arr));
+describe('Task 3. Filter range "in place"', function() {
+  it("returns the filtered values", function() {
+
+    let arr = [5, 3, 8, 1];
+
+    filterRangeInPlace(arr, 1, 4); 
+
+    assert.deepEqual(arr, [3, 1]);
+  });
+
+  it("doesn't return anything", function() {
+    assert.isUndefined(filterRangeInPlace([1,2,3], 1, 4)); 
   });
 });
-describe("Task 4. Sum input numbers", function() {
-  beforeEach(function() {
-    sinon.stub(window, "prompt");
-  });
-  afterEach(function() {
-    prompt.restore();
-  });
-  it("3 + null = 3", function() {
-    prompt.onCall(0).returns(3);
-    prompt.onCall(1).returns(null);
-    assert.equal(someObj.sumInput(), 3);
-  });
-  context("НЕ УДАЁТСЯ ПРОДЕЛАТЬ ЭТОТ ТЕСТ, ТАК КАК ПОСЛЕДУЮЩИЕ ВЫЗОВЫ СКЛАДЫВАЮТ(СУММИРУЮТ) ЗНАЧЕНИЯ ИЗ ПРЕДЫДУЩИХ.", function() {
-    it("7 + '' = 7", function() {
-      prompt.onCall(0).returns(7);
-      prompt.onCall(1).returns('');
-      assert.equal(someObj.sumInput(), 7);
-    });
-    it("11 + null = 11", function() {
-      prompt.onCall(0).returns(11);
-      prompt.onCall(1).returns('someone else');
-      assert.equal(someObj.sumInput(), 11);
-    });
+describe("Task 4. Sort in the reverse order", function() {
+  it("sorting", function() {
+    let arr = [5, 2, 1, -10, 8];
+
+    sortReverseOrder(arr);
+    
+    assert.deepEqual(arr, [ 8, 5, 2, 1, -10 ]);
   });
 });
-describe("Task 5. A maximal subarray", function() {
-  it("maximal subsum of [1, 2, 3] equals 6", function() {
-    assert.equal(getMaxSubSum([1, 2, 3]), 6);
+describe("Task 5. Copy and sort array", function() {
+  it('checking new variable', function() {
+    let arr = ["HTML", "JavaScript", "CSS"],
+        sorted = copySorted(arr);
+    assert.deepEqual(sorted, ['CSS', 'HTML', 'JavaScript']);
+  });
+  it('checking initial variable', function() {
+    let arr = ["HTML", "JavaScript", "CSS"],
+        sorted = copySorted(arr);
+    assert.deepEqual(arr, ['HTML', 'JavaScript', 'CSS']);
+  });
+});
+describe("Task 6. Map to names", function() {
+
+  it("names = ['John', 'Pete', 'Mary']", function() {
+    let john = { name: "John", age: 25 },
+        pete = { name: "Pete", age: 30 },
+        mary = { name: "Mary", age: 28 },
+
+        users = [ john, pete, mary ];
+    
+    assert.deepEqual(createMapToNames(users), ['John', 'Pete', 'Mary']);
+  });
+});
+describe("Task 7. Map to objects", function() {
+  it('deepEqual Map', function() {
+    let john = { name: "John", surname: "Smith", id: 1 },
+        pete = { name: "Pete", surname: "Hunt", id: 2 },
+        mary = { name: "Mary", surname: "Key", id: 3 },
+
+        users = [ john, pete, mary ];
+    
+    assert.deepEqual(usersMapped(users), [
+      { fullName: "John Smith", id: 1 },
+      { fullName: "Pete Hunt", id: 2 },
+      { fullName: "Mary Key", id: 3 }
+    ]);
+  });
+});
+describe("Task 8. Sort objects", function() {
+  it('sorting', function() {
+    let john = { name: "John", age: 25 },
+        pete = { name: "Pete", age: 30 },
+        mary = { name: "Mary", age: 28 },
+
+        arr = [ john, pete, mary ];
+
+    assert.deepEqual(sortByName(arr), [ john, mary, pete ]);
+  });
+});
+describe("Task 9. Shuffle an array", function() {
+  it('testing is not impossible', function() {
+    let arr = [1, 2, 3];
+    assert.sameMembers(shuffle(arr), arr/*, [message]*/);
+  })
+});
+describe("Task 10. Get average age", function() {
+  it("average", function() {
+    let john = { name: "John", age: 25 },
+        pete = { name: "Pete", age: 30 },
+        mary = { name: "Mary", age: 29 },
+
+        arr = [ john, pete, mary ];
+    
+    assert.equal(getAverageAge(arr), 28);
+  });
+});
+describe("Task 11. Filter unique array members", function() {
+  it("removes non-unique elements", function() {
+    let strings = ["Hare", "Krishna", "Hare", "Krishna",
+      "Krishna", "Krishna", "Hare", "Hare", ":-O"
+    ];
+
+    assert.deepEqual(unique(strings), ["Krishna", "Hare", ":-O"]);
   });
 
-  it("maximal subsum of [-1, 2, 3, -9] equals 5", function() {
-    assert.equal(getMaxSubSum([-1, 2, 3, -9]), 5);
-  });
-
-  it("maximal subsum of [-1, 2, 3, -9, 11] equals 11", function() {
-    assert.equal(getMaxSubSum([-1, 2, 3, -9, 11]), 11);
-  });
-
-  it("maximal subsum of [-2, -1, 1, 2] equals 3", function() {
-    assert.equal(getMaxSubSum([-2, -1, 1, 2]), 3);
-  });
-
-  it("maximal subsum of [100, -9, 2, -3, 5] equals 100", function() {
-    assert.equal(getMaxSubSum([100, -9, 2, -3, 5]), 100);
-  });
-
-  it("maximal subsum of [] equals 0", function() {
-    assert.equal(getMaxSubSum([]), 0);
-  });
-
-  it("maximal subsum of [-1] equals 0", function() {
-    assert.equal(getMaxSubSum([-1]), 0);
-  });
-
-  it("maximal subsum of [-1, -2] equals 0", function() {
-    assert.equal(getMaxSubSum([-1, -2]), 0);
+  it("does not change the source array", function() {
+    let strings = ["Krishna", "Krishna", "Hare", "Hare"];
+    unique(strings);
+    assert.deepEqual(strings, ["Krishna", "Krishna", "Hare", "Hare"]);
   });
 });

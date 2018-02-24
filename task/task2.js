@@ -1,15 +1,5 @@
-//Task 2. Array operations.
+//Task 2. Filter range.
 
-let styles = ['Jazz', 'Blues'],
-    getMiddleArray = arr => arr.length % 2 === 1 ? (arr.length -1) / 2 : (arr.length / 2) - 1;
+let filterRange = (arr, a, b) => arr.filter(item => a <= item && item <= b);
 
-styles.push('Rock-n-Roll');
-
-styles[getMiddleArray(styles)] = 'Classics';
-
-//alert(styles.shift());
-
-//styles.unshift("Rap", "Reggae");
-
-
-//done ++++
+//done +
