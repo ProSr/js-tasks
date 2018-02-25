@@ -1,5 +1,3 @@
-//Task 1. Translate border-left-width to borderLeftWidth
+//Task 1. Unique Caption
 
-let camelize = str => (arr => arr.reduce((a, b) => a + (b[0].toUpperCase() + b.substr(1))))(str.split('-'));
-
-//done +
+//done

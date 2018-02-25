@@ -1,5 +1,3 @@
-//Task 5. Copy and sort array
+//Task 5. Someone Else
 
-let copySorted = arr => [].concat(arr).sort();
-
-//done +
+//done
