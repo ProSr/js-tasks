@@ -1,28 +1,25 @@
-describe("Task 1 Sum the properties", function() {
-  it("returns sum of salaries", function() {
+describe("Task 1 Destructuring assignment", function() {
+  it('checkDestructuring(user) returns "John,30,false"', function() {
+    let user = {
+      name: "John",
+      years: 30
+    };
+    
+    assert.equal(checkDestructuring(user), 'John,30,false')
+  });
+});
+describe("Task 2. The Maximal Salary", function() {
+  it("returns top-paid person", function() {
     let salaries = {
       "John": 100,
       "Pete": 300,
       "Mary": 250
     };
 
-    assert.equal( sumSalaries(salaries), 650 );
+    assert.equal( topSalary(salaries), "Pete" );
   });
 
-  it("returns 0 for the empty object", function() {
-    assert.strictEqual( sumSalaries({}), 0);
-  });
-});
-describe("Task 2. Count properties", function() {
-  it("counts the number of properties", function() {
-    assert.equal( count({a: 1, b: 2}), 2 );
-  });
-
-  it("returns 0 for an empty object", function() {
-    assert.equal( count({}), 0 );
-  });
-
-  it("ignores symbolic properties", function() {
-    assert.equal( count({ [Symbol('id')]: 1 }), 0 );
+  it("returns null for the empty object", function() {
+    assert.isNull( topSalary({}) );
   });
 });

@@ -1,3 +1,7 @@
-//Task 1. Sum the properties
-let sumSalaries = (a, b = Object.values(a), c = b.length) => c ? b.reduce((a, b) => a + b) : c;
-//done + + +
+//Task 1. Destructuring assignment
+
+let checkDestructuring = ({name, years: age, isAdmin = false}) => String([name, age, isAdmin]);
+
+//let {name, years: age, isAdmin = false} = user; // —— this task
+
+//done + + + ±
