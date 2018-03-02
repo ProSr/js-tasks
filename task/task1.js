@@ -1,3 +1,3 @@
 //Task 1. Sum the properties
-let sumSalaries = salaries => Object.values(salaries).length ? Object.values(salaries).reduce((a, b) => a + b) : 0;
-//done + ± +
+let sumSalaries = (a, b = Object.values(a), c = b.length) => c ? b.reduce((a, b) => a + b) : c;
+//done + + +

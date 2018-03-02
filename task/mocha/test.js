@@ -13,7 +13,7 @@ describe("Task 1 Sum the properties", function() {
     assert.strictEqual( sumSalaries({}), 0);
   });
 });
-describe.only("Task 2. Count properties", function() {
+describe("Task 2. Count properties", function() {
   it("counts the number of properties", function() {
     assert.equal( count({a: 1, b: 2}), 2 );
   });
