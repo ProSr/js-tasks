@@ -1,7 +1,4 @@
-//Task 1. Destructuring assignment
+//Task 1. Create a date
+let dateOne = new Date(2012, 1, 20, 3, 12);
 
-let checkDestructuring = ({name, years: age, isAdmin = false}) => String([name, age, isAdmin]);
-
-//let {name, years: age, isAdmin = false} = user; // —— this task
-
-//done + + + ±
+//done 
