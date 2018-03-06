@@ -1,4 +1,6 @@
-//Task 1. Create a date
-let dateOne = new Date(2012, 1, 20, 3, 12);
+//Task 1. Turn the object into JSON and back
+let user = {name: "John Smith",age: 35},
+    jsOn = JSON.stringify(user),
+    parSe = JSON.parse(jsOn);
 
-//done 
+//done + + ±

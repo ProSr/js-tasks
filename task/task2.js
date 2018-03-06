@@ -1,4 +1,3 @@
-//Task 2. Show a weekday
-let getWeekDay = date => ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'][date.getDay()];
-
-//done + + +
+//Task 2. Exclude backreferences
+let jsonReplacer = (a, ...b) => JSON.stringify(a, (key, value) => ((key != '') && (value == a)) ? undefined : value);
+//done ± -
