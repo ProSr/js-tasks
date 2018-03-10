@@ -1,3 +1,3 @@
-//Task 2. Exclude backreferences
-let jsonReplacer = (a, ...b) => JSON.stringify(a, (key, value) => ((key != '') && (value == a)) ? undefined : value);
-//done ± -
+//Task 2. Calculate factorial
+let factorial = n => n ? n * factorial(--n) : 1;
+//done + + +
