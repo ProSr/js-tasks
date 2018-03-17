@@ -1,14 +1,3 @@
-//Task 2. Counter object
-function Counter() {
-  let count = 0;
+//Task 2. Sum with an arbitrary amount of brackets
 
-  this.up = function() {
-    return ++count;
-  };
-  this.down = function() {
-    return --count;
-  };
-}
-
-let counter2 = new Counter();
 //done

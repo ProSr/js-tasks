@@ -1,14 +1,22 @@
-//Task 1. Are counters independent?
+//Task 1. Set and decrease for counter
+
 function makeCounter() {
   let count = 0;
 
-  return function() {
-    return count++;
-  };
+  // ... your code ...
 }
 
 let counter = makeCounter();
-let counter1 = makeCounter();
 
-//Answer: They independent
+alert( counter() ); // 0
+alert( counter() ); // 1
+
+counter.set(10); // set the new count
+
+alert( counter() ); // 10
+
+counter.decrease(); // decrease the count by 1
+
+alert( counter() ); // 10 (instead of 11)
+
 //done
