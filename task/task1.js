@@ -1,22 +1,31 @@
 //Task 1. Set and decrease for counter
 
+/* //FMethods + NFE
+function makeCounter() {
+  
+  let counter = function() {
+    return counter.count++;
+  };
+  counter.count = 0;
+  counter.set = n => counter.count = n;
+  counter.decrease = n => counter.count--;
+  
+  return counter;
+}
+*/
+
+//Closure + NFE
 function makeCounter() {
   let count = 0;
-
-  // ... your code ...
+  
+  let counter = function() {
+    return count++;
+  };
+  
+  counter.set = n => count = n;
+  counter.decrease = n => count--;
+  
+  return counter;
 }
 
-let counter = makeCounter();
-
-alert( counter() ); // 0
-alert( counter() ); // 1
-
-counter.set(10); // set the new count
-
-alert( counter() ); // 10
-
-counter.decrease(); // decrease the count by 1
-
-alert( counter() ); // 10 (instead of 11)
-
-//done
+// Done
