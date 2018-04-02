@@ -1,15 +1,14 @@
-// Task 1. Output every second
+// Task 1. Spy decorator
 
-setTimeout(() => printNumbersInterval(1, 3), 0);
-setTimeout(() => printNumbersTimeout(1, 3), 3000);
-
-// eslint-disable-next-line no-console
-let printNumbersInterval = (from, to, increment) =>  increment = setInterval(() => (from >= to + 1) ? clearInterval(increment) : console.log(`setInterval: ${from++}`), 1000),
+function spy(func) {
 	
-	printNumbersTimeout = (from, to) => setTimeout(function run() { 
-		// eslint-disable-next-line no-console
-														console.log(`setTimeout: ${from++}`);
-														(from <= to) ? setTimeout(run, 1000) : clearTimeout(run);
-													}, 1000);
+	function wrapper(...args) {
+		wrapper.calls.push(args);
+		
+		return func.apply(this, args);
+	}
+	wrapper.calls = [];
+	return wrapper;
+}
 
 // Done

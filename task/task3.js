@@ -1,3 +1,16 @@
-//Task 3. What will setTimeout show?
-	Executing setTimeout will work after the completion of the current code
+//Task 3. Debounce decorator
+/* eslint-disable no-undef */
+function debounce(f, ms) { // eslint-disable-line no-unused-vars
+	let someVariable = true;
+	
+	return function(a) {
+		if(someVariable) {
+			f.call(this, a);
+			someVariable = false;
+			
+			setTimeout(() => someVariable = true, ms);
+		}	
+	}
+} 
+
 //done
