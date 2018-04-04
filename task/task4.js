@@ -1,16 +1,23 @@
-//Task 3. Throttle decorator
-/* eslint-disable no-undef */
-function throttle(f, ms) { // eslint-disable-line no-unused-vars
-	let switcher = true,
-		closure;
-	return function wrapper(a) {
-		if(a !== undefined) closure = a;
-		
-		if(switcher === true) {
-			f(closure);
-			switcher = setTimeout(() => {switcher = true; wrapper()}, ms);
-		}
-		
-	}
-}
-//done
+// Task 4. Ask losing this
+
+// eslint-disable-next-line no-unused-vars
+			function askPassword(ok, fail) {
+// eslint-disable-next-line no-debugger
+				let password = prompt("Password?", "");
+// eslint-disable-next-line no-undef
+				if (password == "rockstar") return ok();
+				else return fail();
+			}
+
+// eslint-disable-next-line no-unused-vars
+			let user2 = {
+				name: "John",
+				loginOk() {
+					return `${this.name} logged in`;
+				},
+				loginFail() {
+					return `${this.name} failed to log in`;
+				}
+			}
+//			askPassword(user2.loginOk, user2.loginFail);
+// done

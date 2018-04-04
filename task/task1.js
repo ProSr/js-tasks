@@ -1,14 +1,12 @@
-// Task 1. Spy decorator
+// Task 1. Bound function as a method
 
-function spy(func) {
-	
-	function wrapper(...args) {
-		wrapper.calls.push(args);
-		
-		return func.apply(this, args);
-	}
-	wrapper.calls = [];
-	return wrapper;
+function f() {
+  return this;
 }
+
+//eslint-disable-next-line no-unused-vars
+let user = {
+  g: f.bind(null)
+};
 
 // Done

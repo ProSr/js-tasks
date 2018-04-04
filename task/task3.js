@@ -1,16 +1,12 @@
-//Task 3. Debounce decorator
-/* eslint-disable no-undef */
-function debounce(f, ms) { // eslint-disable-line no-unused-vars
-	let someVariable = true;
-	
-	return function(a) {
-		if(someVariable) {
-			f.call(this, a);
-			someVariable = false;
-			
-			setTimeout(() => someVariable = true, ms);
-		}	
-	}
-} 
+//Task 3. Function property after bind
+function sayHi() {
+  return this.name;
+}
+sayHi.test = 5;
 
+//eslint-disable-next-line no-unused-vars
+let bound = sayHi.bind({
+  name: "John"
+});
+	
 //done

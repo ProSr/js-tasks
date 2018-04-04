@@ -1,9 +1,10 @@
-// Task 2. Delaying decorator
-/* eslint-disable no-unused-vars */
-function delay(f, ms) {
-	return function() {
-
-		setTimeout(() => f.apply(this, arguments), ms); // eslint-disable-line no-undef
-	}
+// Task 2. Second bind
+//eslint-disable-next-line no-unused-vars
+function f() {
+  return this.name;
 }
+
+//eslint-disable-next-line no-func-assign
+f = f.bind( {name: "John"} ).bind( {name: "Ann" } );
+
 //done
