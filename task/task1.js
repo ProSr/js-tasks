@@ -1,12 +1,17 @@
-// Task 1. Bound function as a method
-
-function f() {
-  return this;
+// Task 1. Partial application for login
+//eslint-disable-next-line no-unused-vars
+function askPassword(ok, fail) {
+  let password = prompt("Password?", '');
+  if (password == "rockstar") return ok();
+  else return fail();
 }
 
-//eslint-disable-next-line no-unused-vars
 let user = {
-  g: f.bind(null)
-};
+  name: 'John',
 
+  login(result) {
+	  debugger;
+    return this.name + (result ? ' logged in' : ' failed to log in');
+  }
+};
 // Done
