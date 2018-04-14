@@ -1,17 +1,10 @@
-// Task 1. Partial application for login
+// Task 1. Working with prototype
+let animal = {
+  jumps: null
+};
 //eslint-disable-next-line no-unused-vars
-function askPassword(ok, fail) {
-  let password = prompt("Password?", '');
-  if (password == "rockstar") return ok();
-  else return fail();
-}
-
-let user = {
-  name: 'John',
-
-  login(result) {
-	  debugger;
-    return this.name + (result ? ' logged in' : ' failed to log in');
-  }
+let rabbit = {
+  __proto__: animal,
+  jumps: true
 };
 // Done
