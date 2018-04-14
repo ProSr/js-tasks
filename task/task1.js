@@ -1,10 +1,8 @@
-// Task 1. Working with prototype
-let animal = {
-  jumps: null
+// Task 1. Changing "prototype"
+function Rabbit() {}
+Rabbit.prototype = {
+  eats: true
 };
-//eslint-disable-next-line no-unused-vars
-let rabbit = {
-  __proto__: animal,
-  jumps: true
-};
+
+let rabbit = new Rabbit();
 // Done

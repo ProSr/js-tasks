@@ -1,56 +1,44 @@
 /* eslint-disable no-undef, no-mixed-spaces-and-tabs */
 describe("Task 1", function() {
-	context("Working with prototype", function() {
-		it("rabbit.jumps === true", function() {
-			assert.equal(rabbit.jumps, true);
+	context("Changing \"prototype\"", function() {
+		it("assert.isTrue(rabbit.eats)", function() {
+			assert.isTrue(rabbit.eats);
 		});
-		it("delete rabbit.jumps;\nrabbit.jumps === null", function() {
-			delete rabbit.jumps;
-			assert.equal(rabbit.jumps, null);
+		it("Rabbit.prototype = {};\nassert.isTrue(rabbit.eats)", function() {
+			Rabbit.prototype = {};
+
+			assert.isTrue(rabbit.eats);
 		});
-		it("delete rabbit.jumps;\nrabbit.jumps === undefined", function() {
-			delete rabbit.jumps;
-			delete animal.jumps;
-			assert.equal(rabbit.jumps, undefined);
+		it("Rabbit.prototype.eats = false;\nassert.isTrue(rabbit.eats)", function() {
+			Rabbit.prototype.eats = false;
+
+			assert.isTrue(rabbit.eats);
 		});
-	});
-});
-describe("Task 2", function() {
-	context("Searching algorithm", function() {
-		it("pockets.pen should be 3 (found in table)", function() {
-			assert(pockets.pen, 3);
+		it("delete rabbit.eats;\nassert.isTrue(rabbit.eats)", function() {
+			delete rabbit.eats;
+
+			assert.isTrue(rabbit.eats);
 		});
-		it("bed.glasses should be 1 (found in head)", function() {
-			assert(bed.glasses, 1);
-		});
-		it("benchmark pockets.glasses is above head.glasses ?", function() {
-			function bench(f) {
-				let start = Date.now();
-				for (let i = 0; i < 5000000; i++) f;
-				return Date.now() - start;
-			}
-			let pocketsGlasses = 0,
-				headGlasses = 0;
-			
-			for (let i = 0; i < 100; i++) {
-				pocketsGlasses += bench(pockets.glasses);
-				headGlasses += bench(head.glasses);
-			}
-			assert.isAbove(headGlasses, pocketsGlasses);
+		it("delete Rabbit.prototype.eats;\nassert.isTrue(rabbit.eats)", function() {
+			delete Rabbit.prototype.eats;
+
+			assert.isTrue(rabbit.eats);
 		});
 	});
 });
-describe("Task 3", function() {
-	context("Why two hamsters are full?", function() {
-		it("rabbit.eat === true", function() {
-			assert.isTrue(rabbit2.full);
+describe.only("Task 2", function() {
+	context("Create an object with the same constructor", function() {
+		it("obj2.constructor == Const", function() {
+			let obj = new Const();
+			let obj2 = new obj.constructor();
+			assert.equal(obj2.constructor, Const);
 		});
-	});
-});
-describe("Task 4", function() {
-	context("Where it writes?", function() {
-		it("speedy.stomach === lazy.stomach", function() {
-			assert.notEqual(speedy.stomach, lazy.stomach);
+		it("obj2.constructor != Const", function() {
+			let obj = new Const();
+			Const.prototype = null;
+			let obj2 = new obj.constructor();
+			assert.equal(obj.constructor, Const);
+			assert.notEqual(obj2.constructor, Const);
 		});
 	});
 });
