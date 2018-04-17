@@ -1,41 +1,39 @@
 /* eslint-disable no-undef, no-mixed-spaces-and-tabs */
 describe("Task 1", function() {
-	context("Add method \"f.defer(ms)\" to functions", function() {
-
+	context("Add toString to the dictionary", function() {
+		let arr2 = [];
 		before(function() {
-			window.alert = sinon.stub(window, "alert");
-			this.clock = sinon.useFakeTimers();
+			for(let key in dictionary) {
+			  	arr2.push(key); // "apple", then "__proto__"
+			}
 		});
-		
-		it("assert.isTrue(rabbit.eats)", function() {
-			f.defer(1000);
-			this.clock.tick(1000);
-			assert(alert.calledWith("Hello!"));
+		it("arr2.toString(), \"apple,__proto__\"", function() {
+			assert.equal(arr2.toString(), "apple,__proto__");
 		});
-		
-		after(function() {
-			window.alert.restore();
-			this.clock.restore();
+		it("dictionary, \"apple,__proto__\"", function() {
+			assert.equal(dictionary, "apple,__proto__");
 		});
 	});
 });
-describe.only("Task 2", function() {
-	context("Add the decorating \"defer()\" to functions", function() {
-
-		before(function() {
+describe("Task 2", function() {
+	context("The difference beteeen calls", function() {
+		beforeEach(function() {
 			window.alert = sinon.stub(window, "alert");
-			this.clock = sinon.useFakeTimers();
 		});
-		
-		it("assert.isTrue(rabbit.eats)", function() {
-			f2.defer2(1000)(1, 2);
-			this.clock.tick(1000);
-			assert(alert.calledWith(3))
-		});
-		
-		after(function() {
+		afterEach(function() {
 			window.alert.restore();
-			this.clock.restore();
+		});
+		it("rabbit.sayHi() == \"Rabbit\"", function() {
+			assert.equal(rabbit.sayHi());
+		});
+		it("Rabbit.prototype.sayHi() == \"Rabbit\"", function() {
+			assert.equal(Rabbit.prototype.sayHi());
+		});
+		it("Object.getPrototypeOf(rabbit).sayHi() == \"Rabbit\"", function() {
+			assert.equal(Object.getPrototypeOf(rabbit).sayHi());
+		});
+		it("rabbit.__proto__.sayHi() == \"Rabbit\"", function() {
+			assert.equal(rabbit.__proto__.sayHi());
 		});
 	});
 });
