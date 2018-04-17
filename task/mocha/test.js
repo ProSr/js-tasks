@@ -24,16 +24,20 @@ describe("Task 2", function() {
 			window.alert.restore();
 		});
 		it("rabbit.sayHi() == \"Rabbit\"", function() {
-			assert.equal(rabbit.sayHi());
+			rabbit.sayHi();
+			assert(alert.calledWith("Rabbit"));
 		});
 		it("Rabbit.prototype.sayHi() == \"Rabbit\"", function() {
-			assert.equal(Rabbit.prototype.sayHi());
+			Rabbit.prototype.sayHi();
+			assert(!alert.calledWith("Rabbit"));
 		});
 		it("Object.getPrototypeOf(rabbit).sayHi() == \"Rabbit\"", function() {
-			assert.equal(Object.getPrototypeOf(rabbit).sayHi());
+			Object.getPrototypeOf(rabbit).sayHi();
+			assert(!alert.calledWith("Rabbit"));
 		});
 		it("rabbit.__proto__.sayHi() == \"Rabbit\"", function() {
-			assert.equal(rabbit.__proto__.sayHi());
+			rabbit.__proto__.sayHi();
+			assert(!alert.calledWith("Rabbit"));
 		});
 	});
 });
