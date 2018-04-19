@@ -1,31 +1,6 @@
-/* eslint-disable no-undef, no-mixed-spaces-and-tabs */
+/* eslint-disable no-undef */
 describe("Task 1", function() {
-	context("An error in the inheritance", function() {
-		beforeEach(function() {
-			window.alert = sinon.stub(window, "alert");
-		});
-		afterEach(function() {
-			window.alert.restore();
-		});
-		
-		it("alert.calledWith(\"Kenq bounces!\")", function() {
-			
-			let kenguru = new Rabbit("Kenq");
-			kenguru.walk();
-			
-			assert(alert.calledWith("Kenq bounces!"));
-		});
-		it("alert.calledWith(\"giraffe bounces!\")", function() {
-			
-			let giraffe = new Animal("giraffe");
-			giraffe.walk();
-			
-			assert(alert.calledWith("giraffe bounces!"));
-		});
-	});
-});
-describe("Task 2", function() {
-	context("Rewrite to prototypes", function() {
+	context("Rewrite to class", function() {
 		function checkingClock() {
 			let date = new Date();
 
@@ -63,10 +38,9 @@ describe("Task 2", function() {
 			
 		});
 		it("alert.calledWith(asdf())", function() {
-			this.clock.tick(1000);
+			this.clock.tick(5000);
 			assert(alert.calledWith(checkingClock()));
 			
 		});
 	});
 });
-
