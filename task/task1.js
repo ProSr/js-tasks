@@ -1,11 +1,23 @@
-// Task 1. Add toString to the dictionary
+// Task 1. An error in the inheritance
+/* eslint-disable no-undef */
 
-let dictionary = Object.create(null);
+function Animal(name) {
+  this.name = name;
+}
 
-dictionary = Object.create(dictionary, { toString: { value() { return Object.keys(this).join() }}});
+Animal.prototype.walk = function() {
+  alert(this.name + ' walks');
+};
 
-// add some data
-dictionary.apple = "Apple";
-dictionary.__proto__ = "test"; // __proto__ is a regular property key here
+function Rabbit(name) {
+  this.name = name;
+}
 
-// Done ++ Great solution!
+Rabbit.prototype = Animal.prototype;
+
+Rabbit.prototype.walk = function() {
+  alert(this.name + " bounces!");
+};
+
+
+// Done 
