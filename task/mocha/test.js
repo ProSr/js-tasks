@@ -1,6 +1,23 @@
 /* eslint-disable no-undef */
 describe("Task 1", function() {
-	context("Rewrite to class", function() {
+	context("Error creating an instance", function() {
+		before(function() {
+			window.alert = sinon.stub(window, "alert");
+		});
+		after(function() {
+			window.alert.restore();
+		});
+		it("alert . calledWith ( \" White Rabbit \" ) === true", function() {
+		let rabbit = new Rabbit("White Rabbit"); // Error: this is not defined
+		alert(rabbit.name);
+			
+			assert(alert.calledWith("White Rabbit"));
+			
+		});
+	});
+});
+describe("Task 2", function() {
+	context("Extended clock", function() {
 		function checkingClock() {
 			let date = new Date();
 
@@ -27,19 +44,33 @@ describe("Task 1", function() {
 		after(function() {
 			this.clock.restore();
 		});
-		it("alert.calledWith(asdf())", function() {
-			let clock = new Clock({template: 'h:m:s'});
-			clock.start();
+		it("alert.calledWith(checkingClock())", function() {
+			lowResolutionClock.start();
 			assert(alert.calledWith(checkingClock()));
 		});
-		it("alert.calledWith(asdf())", function() {
-			this.clock.tick(1000);
+		it("alert.calledWith(checkingClock())", function() {
+			this.clock.tick(10000);
 			assert(alert.calledWith(checkingClock()));
 			
 		});
-		it("alert.calledWith(asdf())", function() {
-			this.clock.tick(5000);
+		it("alert.calledWith(checkingClock())", function() {
+			this.clock.tick(20000);
 			assert(alert.calledWith(checkingClock()));
+			
+		});
+	});
+});
+describe("Task 3", function() {
+	context("Class extends Object?", function() {
+		before(function() {
+			window.alert = sinon.stub(window, "alert");
+		});
+		after(function() {
+			window.alert.restore();
+		});
+		it("alert.calledWidth()", function() {
+			alert( rabbit2.hasOwnProperty('name') );
+			assert(alert.calledWith());
 			
 		});
 	});
