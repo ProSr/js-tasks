@@ -1,17 +1,17 @@
-// Task 1. Error creating an instance
-class Animal {
-
-	constructor(name) {
-		this.name = name;
-	}
-
-}
-//eslint-disable-next-line no-unused-vars
-class Rabbit extends Animal {
-	constructor(name) {
-		super(name);
-		this.created = Date.now();
+// Task 1. Finally or just the code?
+function b() {
+	try {
+		let l = 'this' + variable + always + 'breaks down';
+	} catch (e) {
+//		(e instanceof EvalError) ? alert('this "alert" will never used') : blabla(); 
+		throw e;
+	} finally {
+		alert('in that task, must be only one \'alert\' message');
 	}
 }
 
+function a() {
+	b();
+	alert('in that task, must be only one \'alert\' message');
+}
 // Done 
