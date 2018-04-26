@@ -1,22 +1,32 @@
 /* eslint-disable no-undef */
 describe("Task 1", function() {
-	context("Finally or just the code?", function() {
-		before(function() {
-			window.alert = sinon.stub(window, "alert");
+	beforeEach(function() {
+		window.alert = sinon.stub(window, "alert")
+	});
+	afterEach(function() {
+		window.alert.restore();
+	});
+	context("Inherit from SyntaxError", function() {
+		
+		it("assert(alert.calledWith('formatting error'))", function() {
+			alert( err.message );
+			assert(alert.calledWith("formatting error"));
 		});
-		after(function() {
-			window.alert.restore();
-		})
-		it('in that task, must be only one \'alert\' message. существует 2 случая, в которых \'finally\' имеет смысл: 1. return &  2. trhow', function() {
-			function c() {
-				try {
-					a();
-				} catch(e) {
-					return e instanceof ReferenceError
-				}
-			};
-			assert.isTrue(c());
-			assert(alert.calledWith('in that task, must be only one \'alert\' message'));
+		it("assert(alert.calledWith('FormatError'))", function() {
+			alert( err.name ); 
+			assert(alert.calledWith("FormatError"));
+		});
+		it("assert(alert.calledWith('stack'))", function() {
+			alert( err.stack );
+			assert(alert.calledWith('FormatError: formatting error\n    at http://127.0.0.1:64089/task1.js:8:11'));
+		});
+		it("assert(alert.calledWith(true))", function() {
+			alert( err instanceof FormatError );
+			assert(alert.calledWith(true));
+		});
+		it("assert(alert.calledWith(true))", function() {
+			alert( err instanceof SyntaxError );
+			assert(alert.calledWith(true));
 		});
 	});
 });
