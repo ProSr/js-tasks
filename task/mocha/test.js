@@ -1,51 +1,64 @@
 /* eslint-disable no-undef */
 describe("Task 1", function() {
+	context("Search for elements", function() {
 
-	context("DOM children", function() {
-
-			
-			it("get DIV element", function() {
-				let p = document.body,
-					d = makeHTML();
-				d();
-				assert.equal(p.firstElementChild, '[object HTMLDivElement]')
-				d('delete html');
+			it('The table with id="age-table"', function() {
+				let form = document.createElement('div')
+				makeHTMLtask1(form);
+				assert.equal(document.getElementById("age-table"), form.lastElementChild.firstElementChild);
 			});
-			it("get UL element", function() {
-				let p = document.body,
-					d = makeHTML();
-				d();
-				assert.equal(p.firstElementChild.lastElementChild, "[object HTMLUListElement]");
-				d('delete html');
+			it("All label elements inside that table (there should be 3 of them)", function() {
+				
+				assert.deepEqual(Array.from(form.children), [form.firstChild, form.getElementsByTagName("hr")[0], form.lastElementChild]);
 			});
-			it("get LI element", function() {
-				let p = document.body,
-					d = makeHTML();
-				d();
-				assert.equal(p.firstElementChild.lastElementChild.childNodes[1], '[object HTMLLIElement]');
-				d('delete html');
+			it("The first td in that table (with the word “Age”)", function() {
+				
+				assert.equal(document.getElementById("age-table").rows[0].firstElementChild, document.body.firstElementChild.lastElementChild.firstElementChild.children[0].firstChild.firstElementChild);
 			});
-
+			it("The form with the name search", function() {
+				
+				assert.equal(document.getElementsByName("search")[0], form.firstElementChild);
+			});
+			it("The first input in that form", function() {
+				
+				assert.equal(document.getElementsByName("search")[0].getElementsByTagName('input')[0], form.firstChild.firstElementChild.lastElementChild);
+			});
+			it("The last input in that form", function() {
+				
+				assert.equal(form.firstElementChild.lastElementChild, document.getElementsByName("search")[0].getElementsByTagName('input')[1]);
+				makeHTMLtask1(form, 'норм');
+				
+			});
 	});
 });
 describe("Task 2", function() {
-	context("The sibling question", function() {
-	
-		it("result1 & result2 always null", function() {
-			let str = "со строкой впереди второй результат тестов не null<div><div>0.0</div><div>0.1</div></div><div><div>1.0</div><div>1.1</div></div>";
-			assert.isFalse(testSibling(str));
+	context("Count descendants", function() {
+		before(function() {
+			window.alert = sinon.stub(window, "alert");
 		});
-	});
-});
-describe("Task 3", function() {
-	context("Select all diagonal cells", function() {
-				
-		it("paint all diagonal cells in red", function() {
-			makeTable();
-			let tab = document.body.firstElementChild;
-			let paint = paintTd(tab);
-			assert.equal(tab.firstElementChild.innerHTML, '<tr><td style="background-color: red;">1:1</td><td>2:1</td><td>3:1</td><td>4:1</td><td>5:1</td></tr><tr><td>1:2</td><td style="background-color: red;">2:2</td><td>3:2</td><td>4:2</td><td>5:2</td></tr><tr><td>1:3</td><td>2:3</td><td style="background-color: red;">3:3</td><td>4:3</td><td>5:3</td></tr><tr><td>1:4</td><td>2:4</td><td>3:4</td><td style="background-color: red;">4:4</td><td>5:4</td></tr><tr><td>1:5</td><td>2:5</td><td>3:5</td><td>4:5</td><td style="background-color: red;">5:5</td></tr>');
-			document.body.removeChild(tab);
+		after(function() {
+			window.alert.restore();
+		});
+		it("form === норм", function() {
+			makeHTMLtask2(document.createElement("div"));
+			getLi(form);
+			assert(alert.calledWith("Animals: 9"));
+			assert(alert.calledWith("Mammals: 4"));
+			assert(alert.calledWith("Cows: 0"));
+			assert(alert.calledWith("Donkeys: 0"));
+			assert(alert.calledWith("Dogs: 0"));
+			assert(alert.calledWith("Tigers: 0"));
+			assert(alert.calledWith("Other: 3"));
+			assert(alert.calledWith("Snakes: 0"));
+			assert(alert.calledWith("Birds: 0"));
+			assert(alert.calledWith("Lizards: 0"));
+			assert(alert.calledWith("Fishes: 5"));
+			assert(alert.calledWith("Aquarium: 2"));
+			assert(alert.calledWith("Guppy: 0"));
+			assert(alert.calledWith("Angelfish: 0"));
+			assert(alert.calledWith("Sea: 1"));
+			assert(alert.calledWith("Sea trout: 0"));
+			makeHTMLtask2(form, "норм");
 		});
 	});
 });
