@@ -1,14 +1,13 @@
-// Task 1. Get the attribute
-function makeTask1() {
-	let task1 = document.createElement('div');
-	task1.dataset.widgetName = 'menu';
-	task1.innerText = 'Choose the genre';
-	task1.id = 'task1'
-	document.body.append(task1);
-}
+// Task 1. createTextNode vs innerHTML vs textContent
+let textTask1 = '<b>I\'m a some text',
+	elementTask1 = document.createElement('div');
+elementTask1.insertAdjacentText('afterbegin', textTask1);
 
-function removeTask1() {
-	document.body.removeChild(task1)
-}
-// Done
+let solution1task1 = elementTask1.cloneNode(false),
+	solution2task1 = elementTask1.cloneNode(false),
+	solution3task1 = elementTask1.cloneNode(false);
 
+solution1task1.append(document.createTextNode(textTask1));
+solution2task1.innerHTML = textTask1;
+solution3task1.textContent = textTask1;
+// Done.
