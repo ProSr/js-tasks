@@ -1,81 +1,107 @@
 /* eslint-disable no-undef */
 describe("Task 1", function() {
-	context("What's the scroll from the bottom?", function() {
-		it("A ScrollBottom variable is our solution for this Task.", function() {
-			auxiliaryHTMLtask1('div');
-			
-			div.scrollTop = (div.scrollHeight - div.clientHeight) / 2;
-			let scrollBottom = div.scrollHeight - div.clientHeight - div.scrollTop;
-			assert.equal(scrollBottom, div.scrollTop);
-			
-			div.scrollTop = div.scrollHeight - div.clientHeight;
-			scrollBottom = div.scrollHeight - div.clientHeight - div.scrollTop;
-			assert.equal(scrollBottom, 0);
-			
-			div.remove();
+	context("Find window coordinates of the field", function() {
+		it("leftUpperOuterCorner", function() {
+			auxiliaryHtmlCssTask1();
+			let node = document.getElementById('field');
+			assert.deepEqual(leftUpperOuterCornerRelativeWindowTask1(node), leftUpperOuterCornerRelativeDocumentTask1(node));
+		});
+		it("RightBottomOuterCorner", function() {
+			let node = document.getElementById('field');
+			assert.deepEqual(RightBottomOuterCornerRelativeWindowTask1(node), RightBottomOuterCornerRelativeDocumentTask1(node));
+		});
+		it("LeftUpperInnerCorner", function() {
+			let node = document.getElementById('field');
+			assert.deepEqual(LeftUpperInnerCornerRelativeWindowTask1(node), LeftUpperInnerCornerRelativeDocumentTask1(node));
+		});
+		it("RightBottomInnerCorner", function() {
+			let node = document.getElementById('field');
+			assert.deepEqual(RightBottomInnerCornerRelativeWindowTask1(node), RightBottomInnerCornerRelativeDocumentTask1(node));
+			auxiliaryHtmlCssTask1remove();
 		});
 	});
 });
 describe("Task 2", function() {
-	context("What is the scrollbar width?", function() {
-		
-		it("A ' scrollBarTask2 ' is our solution for this Task.", function() {
-			auxiliaryHTMLtask2('div');
-			
-			let scrollBarTask2 = div.offsetWidth - div.clientWidth - div.clientLeft * 2;
-			assert.equal(scrollBarTask2, 0);
-			
+	after(function() {
 			div.remove();
+	});
+	context("Show a note near the element", function() {
+		it("anchor . getBoundingClientRect ( ) . top === div . querySelectorAll ( '.note' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
+			auxiliaryHtmlCssTask2(document.createElement('div'));
+			let anchor = div.querySelector('blockquote');
+			showNoteTask2(anchor, "top", "note above");
+			assert.equal(anchor.getBoundingClientRect().top, div.querySelectorAll('.note')[0].getBoundingClientRect().bottom);
+		});
+		it("anchor . getBoundingClientRect ( ) . right === div . querySelectorAll ( '.note' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
+			let anchor = div.querySelector('blockquote');
+			showNoteTask2(anchor, "right", "note at the right");
+			assert.equal(anchor.getBoundingClientRect().right, div.querySelectorAll('.note')[1].getBoundingClientRect().left);
+		});
+		it("anchor . getBoundingClientRect ( ) . bottom === div . querySelectorAll ( '.note' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
+			let anchor = div.querySelector('blockquote');
+			showNoteTask2(anchor, "bottom", "note below");
+			assert.equal(anchor.getBoundingClientRect().bottom, div.querySelectorAll('.note')[2].getBoundingClientRect().top);
 		});
 	});
 });
 describe("Task 3", function() {
-	context("Place the ball in the field center", function() {
-		
-		it("A ' solutionTask3 ' is our solution for this Task", function() {
-			auxiliaryHTMLtask3();
-			solutionTask3();
-			
-			assert.equal(Number.parseInt(ball.style.top), ball.offsetTop);
-			assert.equal(Number.parseInt(ball.style.left), ball.offsetLeft);
-			
-			field.remove();
+	after(function() {
+			divTask3.remove();
+	});
+	context("Show a note near the element (absolute)", function() {
+		it("anchor . getBoundingClientRect ( ) . top === div . querySelectorAll ( '.note' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
+			auxiliaryHtmlCssTask3(document.createElement('div'));
+			let anchor = divTask3.querySelector('blockquote');
+			showNoteTask3(anchor, "top", "note above");
+			assert.equal(anchor.getBoundingClientRect().top, divTask3.getElementsByClassName('noteTask3')[0].getBoundingClientRect().bottom);
+		});
+		it("anchor . getBoundingClientRect ( ) . right === div . querySelectorAll ( '.note' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
+			let anchor = divTask3.querySelector('blockquote');
+			showNoteTask3(anchor, "right", "note at the right");
+			assert.equal(anchor.getBoundingClientRect().right, divTask3.querySelectorAll('.noteTask3')[1].getBoundingClientRect().left);
+		});
+		it("anchor . getBoundingClientRect ( ) . bottom === div . querySelectorAll ( '.note' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
+			let anchor = divTask3.querySelector('blockquote');
+			showNoteTask3(anchor, "bottom", "note below");
+			assert.equal(anchor.getBoundingClientRect().bottom, divTask3.querySelectorAll('.noteTask3')[2].getBoundingClientRect().top);
 		});
 	});
 });
 describe("Task 4", function() {
-	context("The difference: CSS width versus clientWidth", function() {
-		
-		it("1. a string is not a number", function() {
-			auxiliaryHTMLtask4();
-			
-			assert.equal(typeof getComputedStyle(div).width, 'string');
-			assert.equal(typeof div.clientWidth, 'number');
-			
+	after(function() {
+			divTask4.remove();
+	});
+	context("Position the note inside (absolute)", function() {
+		it("anchor . getBoundingClientRect ( ) . top === div . getElementsByClassName ( 'noteTask4' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
+			auxiliaryHtmlCssTask4(document.createElement('div'));
+			let anchor = divTask4.querySelector('blockquote');
+			showNoteTask4(anchor, "top-out", "note top-out");
+			assert.equal(anchor.getBoundingClientRect().top, divTask4.getElementsByClassName('noteTask4')[0].getBoundingClientRect().bottom);
 		});
-		it("2. If css property 'boxSizing' equals 'border-box', then getComputedStyle is not equals clientWidth", function() {
-			div.style.boxSizing = 'border-box';
-			
-			assert.notEqual(getComputedStyle(div).width, div.clientWidth + 'px');
-			
+		it("anchor . getBoundingClientRect ( ) . right === div . getElementsByClassName ( 'noteTask4' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
+			let anchor = divTask4.querySelector('blockquote');
+			showNoteTask4(anchor, "right-out", "note at the right-out");
+			assert.equal(Math.round(anchor.getBoundingClientRect().right), divTask4.getElementsByClassName('noteTask4')[1].getBoundingClientRect().left);
 		});
-		it("3. if div . style . width === auto, then it haven't the size — div.style.width === 'auto'", function() {
-			div.style.width = 'auto';
-			
-			assert.equal(div.style.width, 'auto');
-			
+		it("anchor . getBoundingClientRect ( ) . bottom === div . getElementsByClassName ( 'noteTask4' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
+			let anchor = divTask4.querySelector('blockquote');
+			showNoteTask4(anchor, "bottom-out", "note bottom-out");
+			assert.equal(anchor.getBoundingClientRect().bottom, divTask4.getElementsByClassName('noteTask4')[2].getBoundingClientRect().top);
 		});
-		it("4. getComputedStyle ( div ) returns the size with dimention postfix 'px'", function() {
-			div.style.width = '500px';
-			
-			assert.equal(getComputedStyle(div).width, '500px');
-			
+		it("anchor . getBoundingClientRect ( ) . top === div . getElementsByClassName ( 'noteTask4' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
+			let anchor = divTask4.querySelector('blockquote');
+			showNoteTask4(anchor, "top-in", "note top-in");
+			assert.equal(anchor.getBoundingClientRect().top, divTask4.getElementsByClassName('noteTask4')[3].getBoundingClientRect().top);
 		});
-		it("5. scrollbar size is substracted if reserved", function() {
-			
-			assert('scrollbar size is substracted if reserved');
-			
-			div.remove();
+		it("anchor . getBoundingClientRect ( ) . right === div . getElementsByClassName ( 'noteTask4' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
+			let anchor = divTask4.querySelector('blockquote');
+			showNoteTask4(anchor, "right-in", "note at the right-in");
+			assert.equal(Math.round(anchor.getBoundingClientRect().right - divTask4.getElementsByClassName('noteTask4')[4].offsetWidth), divTask4.getElementsByClassName('noteTask4')[4].getBoundingClientRect().left);
+		});
+		it("anchor . getBoundingClientRect ( ) . bottom === div . getElementsByClassName ( 'noteTask4' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
+			let anchor = divTask4.querySelector('blockquote');
+			showNoteTask4(anchor, "bottom-in", "note bottom-in");
+			assert.equal(anchor.getBoundingClientRect().bottom, divTask4.getElementsByClassName('noteTask4')[5].getBoundingClientRect().bottom);
 		});
 	});
 });

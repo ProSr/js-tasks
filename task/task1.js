@@ -1,28 +1,126 @@
-// Task 1. What's the scroll from the bottom?
-function auxiliaryHTMLtask1(id) {
-	let div = document.createElement('div');
-	div.id = id;
+// Task 1. Find window coordinates of the field
+function auxiliaryHtmlCssTask1() {
 	
-	inputloremIpsumTask1(div);
-	inputAuxiliaryCSStask1(div);
-	
+	let div  = document.createElement('div');
+	div.id = 'div';
+	div.innerHTML = `Click anywhere to get window coordinates.<br>That's for testing, to check the result you get by JavaScript.<br><div id="coords">(click coordinates show up here)</div><div id="field"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</div>\
+<div class="triangle-right" style="left:-20px;top:-176px">1</div>\
+<div class="triangle-right" style="left:-10px;top:-178px">3</div>\
+<div class="triangle-right" style="left:190px;top:-40px">4</div>\
+<div class="triangle-right" style="left:200px;top:-42px">2</div>`;
 	document.body.append(div);
-	
-	function inputloremIpsumTask1(node) {
-		node.innerHTML = '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>';
-		node.innerText += node.innerText;
-		node.innerText += node.innerText;
-		node.innerText += node.innerText;
-	}
-	function inputAuxiliaryCSStask1(node) {
-		node.style.width = '500px';
-		node.style.height = '750px';
-		node.style.background = 'lightgray';
-		node.style.borderRadius = '2px solid grey';
-		node.style.borderRadius = '15px';
-		node.style.padding = '5px';
-		node.style.overflow = 'auto';
-	}
+	div.insertAdjacentHTML('afterbegin', `<style>
+		body {
+		  padding: 20px 0 0 20px;
+		  cursor: pointer;
+		}
+
+		#field {
+		  overflow: hidden;
+		  width: 200px;
+		  height: 150px;
+		  border-top: 10px solid black;
+		  border-right: 10px solid gray;
+		  border-bottom: 10px solid gray;
+		  border-left: 10px solid black;
+		  background-color: #00FF00;
+		  font: 10px/1.2 monospace;
+		}
+
+		.triangle-right {
+		  position: relative;
+		  width: 0;
+		  height: 0;
+		  border-top: 6px solid transparent;
+		  border-bottom: 6px solid transparent;
+		  border-left: 20px solid red;
+		  text-indent: -20px;
+		  font: 12px/1 monospace;
+		}</style>`);
+	document.onclick = function(e) { // shows click coordinates
+      coords.innerHTML = e.clientX + ':' + e.clientY;
+    };
+}
+function auxiliaryHtmlCssTask1remove() {
+	document.onclick = '';
+	div.remove();
 }
 
+function leftUpperOuterCornerRelativeWindowTask1(node) {
+	let box = node.getBoundingClientRect();
+	return { 
+		top: box.top,
+		left: box.left
+	};
+}
+function leftUpperOuterCornerRelativeDocumentTask1(node) {
+	let box = node.getBoundingClientRect();
+	return {
+		top: box.top + pageYOffset,
+		left: box.left + pageXOffset
+	};
+}
+function RightBottomOuterCornerRelativeWindowTask1(node) {
+	let box = node.getBoundingClientRect();
+	return { 
+// right solution
+		top: box.bottom,
+		left: box.right,
+/* my solution
+		top: box.top + node.offsetHeight,
+		left: box.left + node.offsetWidth
+*/
+	};
+}
+function RightBottomOuterCornerRelativeDocumentTask1(node) {
+	let box = node.getBoundingClientRect();
+	return { 
+// right solution
+		top: box.bottom + pageYOffset,
+		left: box.right + pageXOffset,
+/* my solution
+		top: box.top + node.offsetHeight + pageYOffset,
+		left: box.left + node.offsetWidth + pageXOffset
+*/
+	};
+}
+function LeftUpperInnerCornerRelativeWindowTask1(node) {
+	let box = node.getBoundingClientRect();
+	return { 
+		top: box.top + node.clientTop,
+		left: box.left + node.clientLeft
+	};
+}
+function LeftUpperInnerCornerRelativeDocumentTask1(node) {
+	let box = node.getBoundingClientRect();
+	return {
+		top: box.top + node.clientTop + pageYOffset,
+		left: box.left + node.clientLeft + pageXOffset
+	};
+}
+function RightBottomInnerCornerRelativeWindowTask1(node) {
+	let box = node.getBoundingClientRect();
+	return { 
+// right solution
+		top: box.top + parseInt(getComputedStyle(node).borderBottomWidth),
+		left: box.left + parseInt(getComputedStyle(node).borderRightWidth),
+/* my solution
+		top: box.top + node.offsetHeight - node.clientHeight - node.clientTop - (node.offsetHeight - node.clientHeight - node.clientTop * 2),
+		left: box.left + node.offsetWidth - node.clientWidth - node.clientLeft - (node.offsetWidth - node.clientWidth - node.clientLeft * 2)
+*/
+	};
+}
+function RightBottomInnerCornerRelativeDocumentTask1(node) {
+	let box = node.getBoundingClientRect();
+	return { 
+// right solution
+		top: box.top + parseInt(getComputedStyle(node).borderBottomWidth) + pageYOffset,
+		left: box.left + parseInt(getComputedStyle(node).borderRightWidth) + pageXOffset
+/* my solution
+		top: box.top + node.offsetHeight - node.clientHeight - node.clientTop - (node.offsetHeight - node.clientHeight - node.clientTop * 2) + pageYOffset,
+		left: box.left + node.offsetWidth - node.clientWidth - node.clientLeft - (node.offsetWidth - node.clientWidth - node.clientLeft * 2) + pageXOffset
+*/
+	};
+}
 // Done.
