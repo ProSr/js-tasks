@@ -1,107 +1,127 @@
 /* eslint-disable no-undef */
 describe("Task 1", function() {
-	context("Find window coordinates of the field", function() {
-		it("leftUpperOuterCorner", function() {
-			auxiliaryHtmlCssTask1();
-			let node = document.getElementById('field');
-			assert.deepEqual(leftUpperOuterCornerRelativeWindowTask1(node), leftUpperOuterCornerRelativeDocumentTask1(node));
+	context("Hide on click", function() {
+		it("The wrap is appended to the body", function() {
+			auxiliaryHTMLtask1();
+			assert.deepEqual(wrapper, document.body.lastChild);
+			assert.equal(wrapper.nodeType, 1);
 		});
-		it("RightBottomOuterCorner", function() {
-			let node = document.getElementById('field');
-			assert.deepEqual(RightBottomOuterCornerRelativeWindowTask1(node), RightBottomOuterCornerRelativeDocumentTask1(node));
-		});
-		it("LeftUpperInnerCorner", function() {
-			let node = document.getElementById('field');
-			assert.deepEqual(LeftUpperInnerCornerRelativeWindowTask1(node), LeftUpperInnerCornerRelativeDocumentTask1(node));
-		});
-		it("RightBottomInnerCorner", function() {
-			let node = document.getElementById('field');
-			assert.deepEqual(RightBottomInnerCornerRelativeWindowTask1(node), RightBottomInnerCornerRelativeDocumentTask1(node));
-			auxiliaryHtmlCssTask1remove();
+		it("The wrap was removed from the body", function() {
+			solutionTask1(true);
+			button.dispatchEvent(new Event('click'));
+			assert.equal(text.hidden, true);
+			wrapper.remove();
 		});
 	});
 });
 describe("Task 2", function() {
-	after(function() {
-			div.remove();
-	});
-	context("Show a note near the element", function() {
-		it("anchor . getBoundingClientRect ( ) . top === div . querySelectorAll ( '.note' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
-			auxiliaryHtmlCssTask2(document.createElement('div'));
-			let anchor = div.querySelector('blockquote');
-			showNoteTask2(anchor, "top", "note above");
-			assert.equal(anchor.getBoundingClientRect().top, div.querySelectorAll('.note')[0].getBoundingClientRect().bottom);
+	context("Hide self", function() {
+		
+		it("The value 'hidden' attribute is false", function() {
+			auxiliaryHTMLtask2();
+			assert.equal(input.hasAttribute('hidden'), 0);
 		});
-		it("anchor . getBoundingClientRect ( ) . right === div . querySelectorAll ( '.note' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
-			let anchor = div.querySelector('blockquote');
-			showNoteTask2(anchor, "right", "note at the right");
-			assert.equal(anchor.getBoundingClientRect().right, div.querySelectorAll('.note')[1].getBoundingClientRect().left);
-		});
-		it("anchor . getBoundingClientRect ( ) . bottom === div . querySelectorAll ( '.note' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
-			let anchor = div.querySelector('blockquote');
-			showNoteTask2(anchor, "bottom", "note below");
-			assert.equal(anchor.getBoundingClientRect().bottom, div.querySelectorAll('.note')[2].getBoundingClientRect().top);
+		it("The value 'hidden' attribute is true", function() {
+			input.dispatchEvent(new Event('click'));
+			assert.equal(input.hasAttribute('hidden'), 1);
+			input.remove();
 		});
 	});
 });
 describe("Task 3", function() {
-	after(function() {
-			divTask3.remove();
-	});
-	context("Show a note near the element (absolute)", function() {
-		it("anchor . getBoundingClientRect ( ) . top === div . querySelectorAll ( '.note' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
-			auxiliaryHtmlCssTask3(document.createElement('div'));
-			let anchor = divTask3.querySelector('blockquote');
-			showNoteTask3(anchor, "top", "note above");
-			assert.equal(anchor.getBoundingClientRect().top, divTask3.getElementsByClassName('noteTask3')[0].getBoundingClientRect().bottom);
+	context("Which handlers run?", function() {
+		before(function() {
+			window.alert = sinon.stub(window, "alert");
 		});
-		it("anchor . getBoundingClientRect ( ) . right === div . querySelectorAll ( '.note' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
-			let anchor = divTask3.querySelector('blockquote');
-			showNoteTask3(anchor, "right", "note at the right");
-			assert.equal(anchor.getBoundingClientRect().right, divTask3.querySelectorAll('.noteTask3')[1].getBoundingClientRect().left);
+		after(function() {
+			window.alert.restore();
+			button.remove();
 		});
-		it("anchor . getBoundingClientRect ( ) . bottom === div . querySelectorAll ( '.note' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
-			let anchor = divTask3.querySelector('blockquote');
-			showNoteTask3(anchor, "bottom", "note below");
-			assert.equal(anchor.getBoundingClientRect().bottom, divTask3.querySelectorAll('.noteTask3')[2].getBoundingClientRect().top);
+		
+		it("Answer: - both handlers run", function() {
+			auxiliaryHTMLtask3();
+			button.dispatchEvent(new Event('click'));
+			assert(alert.calledWith('1'));
+			assert(alert.calledWith(2));
 		});
 	});
 });
 describe("Task 4", function() {
-	after(function() {
-			divTask4.remove();
+	context("Move the ball across the field", function() {
+		before(function() {
+			auxiliaryHTMLtask4();
+			solutionTask4();
+		});
+		after(function() {
+			dT4.remove();
+		});
+
+		it("it use all requirements", function() {
+			assert(1);
+		});
 	});
-	context("Position the note inside (absolute)", function() {
-		it("anchor . getBoundingClientRect ( ) . top === div . getElementsByClassName ( 'noteTask4' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
-			auxiliaryHtmlCssTask4(document.createElement('div'));
-			let anchor = divTask4.querySelector('blockquote');
-			showNoteTask4(anchor, "top-out", "note top-out");
-			assert.equal(anchor.getBoundingClientRect().top, divTask4.getElementsByClassName('noteTask4')[0].getBoundingClientRect().bottom);
+});
+describe("Task 5", function() {
+	context("Create a menu sliding menu", function() {
+		before(function() {
+			auxiliaryHTMLtask5();
+			solutionTask5();
 		});
-		it("anchor . getBoundingClientRect ( ) . right === div . getElementsByClassName ( 'noteTask4' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
-			let anchor = divTask4.querySelector('blockquote');
-			showNoteTask4(anchor, "right-out", "note at the right-out");
-			assert.equal(Math.round(anchor.getBoundingClientRect().right), divTask4.getElementsByClassName('noteTask4')[1].getBoundingClientRect().left);
+		after(function() {
+			divTask5.remove();
 		});
-		it("anchor . getBoundingClientRect ( ) . bottom === div . getElementsByClassName ( 'noteTask4' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
-			let anchor = divTask4.querySelector('blockquote');
-			showNoteTask4(anchor, "bottom-out", "note bottom-out");
-			assert.equal(anchor.getBoundingClientRect().bottom, divTask4.getElementsByClassName('noteTask4')[2].getBoundingClientRect().top);
+		it("by default ul hidden = true", function() {
+			assert.equal(getComputedStyle(divTask5.lastElementChild).display, 'none');			
 		});
-		it("anchor . getBoundingClientRect ( ) . top === div . getElementsByClassName ( 'noteTask4' ) [ 0 ] . getBoundingClientRect ( ) . bottom", function() {
-			let anchor = divTask4.querySelector('blockquote');
-			showNoteTask4(anchor, "top-in", "note top-in");
-			assert.equal(anchor.getBoundingClientRect().top, divTask4.getElementsByClassName('noteTask4')[3].getBoundingClientRect().top);
+		it("if call dispanchEvent method with click event then ul hidden = false", function() {
+			divTask5.querySelector('.t').dispatchEvent(new Event('click'));
+			assert.equal(getComputedStyle(divTask5.lastElementChild).display, 'block');			
+			
 		});
-		it("anchor . getBoundingClientRect ( ) . right === div . getElementsByClassName ( 'noteTask4' ) [ 1 ] . getBoundingClientRect ( ) . left", function() {
-			let anchor = divTask4.querySelector('blockquote');
-			showNoteTask4(anchor, "right-in", "note at the right-in");
-			assert.equal(Math.round(anchor.getBoundingClientRect().right - divTask4.getElementsByClassName('noteTask4')[4].offsetWidth), divTask4.getElementsByClassName('noteTask4')[4].getBoundingClientRect().left);
+	});
+});
+describe("Task 6", function() {
+	context("Add a closing button", function() {
+		before(function() {
+			auxiliaryHTMLtask6();
+			solutionTask6();
+		}); 
+		after(function(){
+			wrapperTask6.remove();
 		});
-		it("anchor . getBoundingClientRect ( ) . bottom === div . getElementsByClassName ( 'noteTask4' ) [ 2 ] . getBoundingClientRect ( ) . top", function() {
-			let anchor = divTask4.querySelector('blockquote');
-			showNoteTask4(anchor, "bottom-in", "note bottom-in");
-			assert.equal(anchor.getBoundingClientRect().bottom, divTask4.getElementsByClassName('noteTask4')[5].getBoundingClientRect().bottom);
+		it("All Elements is wisible", function() {
+			assert.equal(document.querySelector('.pane').hidden, false);
+			assert.equal(document.querySelector('.pane').nextElementSibling.hidden, false);
+			assert.equal(document.querySelector('.pane').nextElementSibling.nextElementSibling.hidden, false);
+		});
+		it("All Elements is hidden", function() {
+			document.querySelector('.pane').lastElementChild.dispatchEvent(new Event('click'));
+			assert.equal(document.querySelector('.pane').hidden, true);
+			document.querySelector('.pane').nextElementSibling.lastElementChild.dispatchEvent(new Event('click'));
+			assert.equal(document.querySelector('.pane').nextElementSibling.hidden, true);
+			document.querySelector('.pane').nextElementSibling.nextElementSibling.lastElementChild.dispatchEvent(new Event('click'));
+			assert.equal(document.querySelector('.pane').nextElementSibling.nextElementSibling.hidden, true);
+		});
+		
+	});
+});
+describe("Task 7", function() {
+	before(function() {
+		auxiliaryHTMLtask7();
+	})
+	after(function() {
+		dT7.remove();
+	})
+	context("Carousel", function() {
+		
+		it("press right arrow 2 times and then evaluate our scrollTop and 260 value", function() {
+			dT7.firstElementChild.nextElementSibling.dispatchEvent(new Event('click'));
+			dT7.firstElementChild.nextElementSibling.dispatchEvent(new Event('click'));
+			assert.equal(dT7.children[2].scrollTop, 260);
+		});
+		it("press left arrow 1 times and then evaluate our scrollTop and 130 value", function() {
+			dT7.firstElementChild.dispatchEvent(new Event('click'));
+			assert.equal(dT7.children[2].scrollTop, 130);
 		});
 	});
 });
