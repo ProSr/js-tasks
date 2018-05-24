@@ -1,49 +1,55 @@
-// Task 4. Move the ball across the field
+// Task 4. Tooltip behavior
 function auxiliaryHTMLtask4() {
-	let dT4 = document.createElement('div');
-	dT4.id = 'dT4';
-	dT4.innerHTML = `<style>
-			body {
-				height: 2000px;
-			}
-			#field {
-				width: 200px;
-				height: 150px;
-				border: 10px solid black;
-				background-color: #00FF00;
-				overflow: hidden;position: absolute;
-			}
-			#ball {
-				position: absolute;
-				transition: .5s ease-out 0.25s;
-			}
-		</style>Click on a field to move the ball there.
-  <br> The ball should never leave the field.<div id="field"><img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</div>`;
-	document.body.prepend(dT4);
+	let wrapTask4 = document.createElement("div");
+	wrapTask4.id = 'wrapTask4';
+	wrapTask4.innerHTML = `<style>
+		body {
+		  height: 2000px;
+		  /* make body scrollable, the tooltip should work after the scroll */
+		}
+		button {
+			position: relative;
+		}
 
-	ball.style.top = field.getBoundingClientRect().top + field.clientTop + pageYOffset + 'px';
-	ball.style.left = field.getBoundingClientRect().left + field.clientLeft + pageXOffset + 'px';
+
+		.tooltip {
+		  /* some styles for the tooltip, you can use your own instead */
+		  position: absolute;
+		  padding: 10px 20px;
+		  border: 1px solid #b3c9ce;
+		  border-radius: 4px;
+		  text-align: center;
+		  font: italic 14px/1.3 arial, sans-serif;
+		  color: #333;
+		  background: #fff;
+		  box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+    }</style><p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p><p>LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa LaLaLa</p><button data-tooltip="the tooltip is longer than the element">Short button</button><button data-tooltip="HTML<br>tooltip">One more button</button><p>Scroll the page to make buttons appear on the top, check if the tooltips show up correctly.</p>`;
+	document.body.prepend(wrapTask4);
 }
 function solutionTask4() {
-	function moveBall(e) {
-		let l = e.clientX - ball.offsetWidth/2,
-			t = e.clientY - ball.offsetHeight/2,
-			coords = field.getBoundingClientRect(),
-			
-			lCh = coords.left + field.clientLeft,
-			tCh = coords.top + field.clientTop,
-			rCh = coords.left + field.clientLeft + field.clientWidth,
-			bCh = coords.top + field.clientTop + field.clientHeight;
-		
-		if(l < lCh) l = lCh;
-		if(t < tCh) t = tCh;
-		if(l + ball.offsetWidth > rCh) l = rCh - ball.offsetWidth;
-		if(t + ball.offsetHeight > bCh) t = bCh - ball.offsetHeight;
+	document.addEventListener('mouseover', showTooltip);
+	document.addEventListener('mouseout', hideTooltip);
+	
+	function showTooltip(event) {
 
-		ball.style.left = l + pageXOffset + 'px';
-		ball.style.top = t + pageYOffset + 'px';
+		if(!event.target.dataset.tooltip) return;
+		let target = event.target,
+			toolTip = document.createElement('div');
+			toolTip.id = 'tooltip';
+			toolTip.className = 'tooltip';
+			toolTip.innerHTML = target.dataset.tooltip;
+		target.append(toolTip);
+		
+		if(target.getBoundingClientRect().top >= tooltip.offsetHeight) tooltip.style.bottom = target.offsetHeight + 'px';
+		else tooltip.style.top = target.offsetHeight + 'px';
+		
+		
+		//получить 
 	}
-	field.onclick = moveBall;
+	function hideTooltip(event) {
+		if(!event.target.dataset.tooltip) return;
+		tooltip.remove();
+
+	}
 }
 // Done.
