@@ -1,31 +1,53 @@
-// Task 2. Tree menu
+// Task 2. Catch links in the element
 function auxiliaryHTMLtask2() {
-	let ul = document.createElement('ul');
-	ul.className = 'tree';
-	ul.id = 'tree';
-	ul.innerHTML = `<style>
-			li > span {
-				display: inline-block;
-			}
-			li > span:hover {
-				font-weight: bold;
-				cursor: pointer;
-			}
+	let divTask2 = document.createElement('div');
+	divTask2.id = 'divTask2';
+	divTask2.innerHTML = `<style>
+		#contents {
+		  padding: 5px;
+		  border: 1px green solid;
+		}
 	</style>`;
-	ul.innerHTML += `<li><span>Animals</span><ul><li><span>Mammals</span><ul><li><span>Cows</span></li><li><span>Donkeys</span></li><li><span>Dogs</span></li><li><span>Tigers</span></li></ul></li><li><span>Other</span><ul><li><span>Snakes</span></li><li><span>Birds</span></li><li><span>Lizards</span></li></ul></li></ul></li><li><span>Fishes</span><ul><li><span>Aquarium</span><ul><li><span>Guppy</span></li><li><span>Angelfish</span></li></ul></li><li><span>Sea</span><ul><li><span>Sea trout</span></li></ul></li></ul></li>`;
-	document.body.prepend(ul);
+	divTask2.innerHTML += `<fieldset id="contents"><legend>#contents</legend><p>How about to read <a href="http://wikipedia.org">Wikipedia</a> or visit <a href="http://w3.org"><i>W3.org</i></a> and learn about modern standards?</p></fieldset>`;
+	document.body.prepend(divTask2);
 }
 function solutionTask2() {
-	tree.addEventListener('click', hideSiblingNode);
-	function hideSiblingNode(event) {
-		let target = event.target;
-		
-		if(target.nodeName !== 'SPAN') return;
-		
-		let toggleElement = event.target.nextElementSibling;
-		if(toggleElement === null) return;
+	contents.onclick = function(event) {
 
-		toggleElement.hidden = !toggleElement.hidden;
-	}
+      function handleLink(href) {
+        let isLeaving = confirm(`Leave for ${href}?`);
+        if (!isLeaving) return false;
+      }
+
+      let target = event.target.closest('a');
+
+      if (target && contents.contains(target)) {
+        return handleLink(target.getAttribute('href'));
+      }
+    };
+
+/* //My Solution
+	contents.addEventListener('click', stopGoingAway);
+	function stopGoingAway(event) {
+// Solution Number 2
+//		let a = event.target.closest('a');
+//		if(a && contents.contains) {
+//			let action = confirm(`ВНИМАНИЕ!\nВы переходите по внешней\nссылке: ${a.getAttribute('href')}\nОтмените действие\nчтобы остаться на сайте.`);
+//			if(!action) event.preventDefault();
+//		}
+
+// Solution Number 1
+//		for(let node of event.path) {
+//			if(node === contents) {
+//				break;
+//			}
+//			if(node.hasAttribute('href')) {
+//				let action = confirm(`ВНИМАНИЕ!\nВы переходите по внешней\nссылке: ${node.getAttribute('href')}\nОтмените действие\nчтобы остаться на сайте.`);
+//				if(!action) event.preventDefault();
+//				break;
+//			}
+//		}
+	};
+*/
 }
 // Done.
