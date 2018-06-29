@@ -1,126 +1,172 @@
-// Task 1. Improved tooltip behavior
+// Task 1. Slider
 function auxiliaryHTMLtask1() {
-	let divTask1 = document.createElement('div');
-	divTask1.id = "divTask1";
-	divTask1.innerHTML = `<style>
-		body {
-		  height: 2000px;
-		  /* the tooltip should work after page scroll too */
-		}
-
-		.tooltip {
-		  position: fixed;
-		  z-index: 100;
-
-		  padding: 10px 20px;
-
-		  border: 1px solid #b3c9ce;
-		  border-radius: 4px;
-		  text-align: center;
-		  font: italic 14px/1.3 arial, sans-serif;
-		  color: #333;
-		  background: #fff;
-		  box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
-		}
-
-		#house {
-		  margin-top: 50px;
-		  width: 400px;
-		  border: 1px solid brown;
-		}
-
-		#roof {
-		  width: 0;
-		  height: 0;
-		  border-left: 200px solid transparent;
-		  border-right: 200px solid transparent;
-		  border-bottom: 20px solid brown;
-		  margin-top: -20px;
-		}
-
-		p {
-		  text-align: justify;
-		  margin: 10px 3px;
-		}
-	</style>`;
-	divTask1.innerHTML += `<div data-tooltip="Here is the house interior" id="house"><div data-tooltip="Here is the roof" id="roof"></div><p>Once upon a time there was a mother pig who had three little pigs.</p><p>The three little pigs grew so big that their mother said to them, "You are too big to live here any longer. You must go and build houses for yourselves. But take care that the wolf does not catch you."<p>The three little pigs set off. "We will take care that the wolf does not catch us," they said.</p><p>Soon they met a man. <a href="https://en.wikipedia.org/wiki/The_Three_Little_Pigs" data-tooltip="Read on…">Hover over me</a></p></div>`;
-	document.body.prepend(divTask1);
+  let divTask1 = document.createElement('div');
+  divTask1.id = 'divTask1';
+  
+  divTask1.innerHTML = `<style>
+    .slider {
+      border-radius: 5px;
+      background: #E0E0E0;
+      background: linear-gradient(left top, #E0E0E0, #EEEEEE);
+      width: 310px;
+      height: 15px;
+      margin: 5px;
+    }
+    .thumb {
+      width: 10px;
+      height: 25px;
+      border-radius: 3px;
+      position: relative;
+      left: 10px;
+      top: -5px;
+      background: blue;
+      cursor: pointer;
+    }
+  </style><div id="slider" class="slider"><div class="thumb"></div></div>`;
+  document.body.prepend(divTask1);
 }
-/*
-// Данный метод неверно работает с вложенными элементами, тк после попадания курсора на них, новые события перезаписывают поведение родительских, поэтому, после события mouseleave с таких элементов, мы перестаём видеть тултипы родительских, так как их перезаписанные тултипы вложенными тултипами стираются, а ожидаемые тултипы не появляются, поскольку мы находимся внутри элементов, не покидаем их, и поэтому события на них не срабатывают. Кроме того, если внутри 
 function solutionTask1() {
-	for(let elem of document.querySelectorAll('[data-tooltip]')) {
-		elem.onmouseenter = showTooltip;
-		elem.onmouseleave = hideTooltip;
-	}
+	kantorSolution();
+//	myFirstSolution();
+//	mySecondSolution();
 	
-	let tooltip = document.createElement('div');
-	tooltip.className = 'tooltip';
-	
-	function showTooltip(e) {
-		
-		let target = e.target,
-			coords = target.getBoundingClientRect(),
-			top,
-			left;
-		
-		tooltip.innerText = target.dataset.tooltip;
-		
-		
-		left = coords.left + (target.offsetWidth - tooltip.offsetWidth) / 2;
-		if (left < 0) left = 0;
-		
-		top = coords.top - tooltip.offsetHeight - 5;
-		if (top < 0) top = coords.top + target.offsetHeight + 5;
-		
-		tooltip.style.left = left + 'px';
-		tooltip.style.top = top + 'px';
-		
-		document.body.append(tooltip);
-	}
-	function hideTooltip(e) {
-		tooltip.remove();
-	}
-}
-*/
+	function mySecondSolution() {
+		 let currentDroppable = null;
 
-function solutionTask1() {
-	divTask1.onmouseover = showTooltip;
-	divTask1.onmouseout = hideTooltip;
-	
-	let tooltip;
-	function showTooltip(e) {
-		
-		let target = e.target.closest('[data-tooltip]');
-		if (!target || !divTask1.contains(target)) return;
-		
-		let coords = target.getBoundingClientRect(),
-			top,
-			left;
-		
-		tooltip = document.createElement('div');
-		tooltip.className = 'tooltip';
-		tooltip.innerText = target.dataset.tooltip;
-		document.body.append(tooltip);
-		
-		
-		left = coords.left + (e.target.offsetWidth - tooltip.offsetWidth) / 2;
-		if (left < 0) left = 0;
-		
-		top = coords.top - tooltip.offsetHeight - 5;
-		if (top < 0) top = coords.top + target.offsetHeight + 5;
-		
-		
-		tooltip.style.left = left + 'px';
-		tooltip.style.top = top + 'px';
-		
-	}
-	function hideTooltip(e) {
-		if (tooltip) {
-			tooltip.remove();
-			tooltip = false;
+		let thumb = document.querySelector('.thumb');
+
+		thumb.onmousedown = function(event) {
+
+		  let shiftX = event.clientX - thumb.getBoundingClientRect().left,
+			  sliderGBCR = slider.getBoundingClientRect(),
+			  eventClientY = (sliderGBCR.bottom - sliderGBCR.top) / 2;
+
+		  moveAt(event.pageX);
+
+		  function moveAt(pageX) {
+			thumb.style.left = pageX - shiftX - sliderGBCR.left + 'px';
 		  }
+
+		  function onMouseMove(event) {
+			if(checkState(event)) moveAt(event.pageX);
+			thumb.hidden = true;
+			let elemBelow = document.elementFromPoint(event.clientX, eventClientY);
+			thumb.hidden = false;
+
+			if (!elemBelow) return;
+
+			let droppableBelow = elemBelow.closest('.slider');
+			if (currentDroppable != droppableBelow) {
+			  if (currentDroppable) {
+				leaveDroppable(currentDroppable);
+			  }
+			  currentDroppable = droppableBelow;
+			  if (currentDroppable) {
+				enterDroppable(currentDroppable);
+			  }
+			}
+		  }
+
+		  document.addEventListener('mousemove', onMouseMove);
+
+		  document.onmouseup = function() {
+			document.removeEventListener('mousemove', onMouseMove);
+			thumb.onmouseup = null;
+		  }
+		  function checkState(e) {
+			let t = thumb.getBoundingClientRect();
+			if(t.left <= sliderGBCR.left - shiftX) {
+			  moveAt(0);
+			  return false;
+			} else if(t.right - shiftX >= sliderGBCR.right) {
+			  moveAt(sliderGBCR.right - sliderGBCR.left - thumb.offsetWidth);
+			  return false;
+			} else return true;
+		  }
+		};
+		function leaveDroppable(elem) {
+
+		};
+		function enterDroppable(elem) {
+
+		};
+		thumb.ondragstart = function() {
+		  return false;
+		};
+
+
+	}
+	function myFirstSolution() {
+    
+		document.querySelector('.thumb').onmousedown = function(e, thumb = document.querySelector('.thumb')) {
+		  event.preventDefault();
+		  let shiftX = e.clientX - thumb.getBoundingClientRect().left,
+			  s = slider.getBoundingClientRect();
+		  checkState(e);
+
+		  function checkState(e) {
+			let t = thumb.getBoundingClientRect();
+			if(t.left < s.left - shiftX) moveAt(0);
+			else if(t.right - shiftX > s.right) moveAt(s.right - s.left - thumb.offsetWidth);
+			else moveAt(e.pageX - s.left - shiftX);
+		  }
+
+		  function moveAt(pageX) {
+			thumb.style.left = pageX + 'px';
+		  }
+
+		  document.onmousemove = function(e, t = thumb.getBoundingClientRect()) {
+			if(!(t.left < s.left - shiftX) && !(t.right - shiftX > s.right)) checkState(e);
+		  };
+
+		  document.onmouseup = function() {
+			document.onmousemove = '';
+			document.onmouseup = '';
+		  };
+		};
+		thumb.ondragstart = function() {
+		  return false;
+		};
+
+	}
+	function kantorSolution() {
 		
+		let thumb = slider.querySelector('.thumb');
+
+		thumb.onmousedown = function(event) {
+		  event.preventDefault(); // prevent selection start (browser action)
+
+		  let shiftX = event.clientX - thumb.getBoundingClientRect().left;
+		  // shiftY not needed, the thumb moves only horizontally
+
+		  document.addEventListener('mousemove', onMouseMove);
+		  document.addEventListener('mouseup', onMouseUp);
+
+		  function onMouseMove(event) {
+			let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+
+			// the pointer is out of slider => lock the thumb within the bounaries
+			if (newLeft < 0) {
+			  newLeft = 0;
+			}
+			let rightEdge = slider.offsetWidth - thumb.offsetWidth;
+			if (newLeft > rightEdge) {
+			  newLeft = rightEdge;
+			}
+
+			thumb.style.left = newLeft + 'px';
+		  }
+
+		  function onMouseUp() {
+			document.removeEventListener('mouseup', onMouseUp);
+			document.removeEventListener('mousemove', onMouseMove);
+		  }
+
+		};
+
+		thumb.ondragstart = function() {
+		  return false;
+		};
 	}
 }
 // Done.
