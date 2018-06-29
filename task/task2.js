@@ -56,7 +56,7 @@ function auxiliaryHTMLtask2() {
 }
 function solutionTask2() {
 	let currentDroppable = null;
-	
+	document.body.style.overflowX = 'hidden';
     divTask2.onmousedown = function(event) {
 //		event.preventDefault();
 		let target = event.target;
@@ -75,7 +75,14 @@ function solutionTask2() {
         target.style.left = pageX - shiftX + 'px';
         target.style.top = pageY - shiftY + 'px';
       }
-
+	  function checking(func) {		  
+		  return function(pageX, pageY) {
+			  if(window.outerWidth < pageX + target.offsetWidth) pageX = a;
+			  func(pageX, pageY);
+		  }
+	  }
+	  moveAt = checking(moveAt);
+		
       function onMouseMove(event) {
         moveAt(event.pageX, event.pageY);
 
@@ -100,7 +107,7 @@ function solutionTask2() {
 
       document.addEventListener('mousemove', onMouseMove);
 
-      target.onmouseup = function() {
+      document.onmouseup = function() {
         document.removeEventListener('mousemove', onMouseMove);
         target.onmouseup = null;
 		  field.style.filter = '';
