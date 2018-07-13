@@ -1,23 +1,23 @@
-// Task 1. Extended hotkeys
+// Task 1. Endless page
+function auxiliaryHTMLtask1() {
+	const divTask1 = document.createElement('div');
+	divTask1.id = 'divTask1';
+	divTask1.innerHTML = '<h1>Scroll me</h1>';
+	divTask1.style.cssText = `
+				position: relative;
+				width: 500px;
+				height: 300px;
+				overflow-y: scroll;
+				padding: 10px;
+				background: rgba(255,255,255,.65);`;
+	document.body.prepend(divTask1);
+	while(document.getElementById('divTask1').lastElementChild.getBoundingClientRect().bottom < document.getElementById('divTask1').getBoundingClientRect().bottom)
+		divTask1.insertAdjacentHTML('beforeend', `<p>Date: ${new Date()}</p>`);
+}
 function solutionTask1() {
-	let keysArray = [];
-	document.onkeydown = keyDown;	
-	document.onkeyup = keyUp;
-	function keyDown(event) {
-		keysArray.push(event.code);
-		runOnKeys(func, keysArray);
-	}
-	function keyUp() {
-		keysArray = [];
-	}
-	function runOnKeys(func, code_n) {
-		if(code_n.includes('KeyQ') && code_n.includes('KeyW')) {
-			keysArray = [];
-			func(code_n);
-		}
-	}
-	function func(...keys) {
-		alert(keys.toString());
-	}
+	divTask1.addEventListener('scroll', function() {
+		if(divTask1.scrollTop + divTask1.offsetHeight > divTask1.scrollHeight - 100)
+			divTask1.insertAdjacentHTML('beforeend', `<p>Date: ${new Date()}</p>`);
+	});
 }
 // Done.
